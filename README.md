@@ -51,7 +51,7 @@ imports: [..., FormsModule]
 
 ### custom pipe
 ```
-{{ text | summary:10 }}
+{{ text | custom:10 }}
 +custom.pipe.ts
 @Pipe({
     name: 'custom'
@@ -62,6 +62,8 @@ export class CustomPipe implements PipeTransform {
         return value.substr(0, limit) + '...';
     }
 }
+@NgModule({
+  declarations: [CustomPipe]
 ```
 
 ### components
