@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from './shared.component';
+import { WorkbenchComponent } from './workbench/workbench.component';
 
 
 
@@ -19,6 +20,7 @@ import { SharedModule } from './shared.component';
     HeaderComponent,
     LoginComponent,
     DashboardComponent,
+    WorkbenchComponent,
   ],
   imports: [
     BrowserModule,

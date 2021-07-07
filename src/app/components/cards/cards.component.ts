@@ -13,4 +13,8 @@ export class CardsComponent implements OnInit {
   ngOnInit(): void {
     this.cardData = this.data;
   }
+
+  cardListTrack(index:number, item:any) {
+    return item ? item : index;
+  }
 }
