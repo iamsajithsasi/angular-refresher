@@ -6,8 +6,29 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## Angular Codes
+
+### Interface
+```
+export interface MyTable {
+    name: string;
+    email: string;
+}
+const tableData: MyTable[] = [
+    {name: "john", email: "john@gmail.com"}
+    {name: "maria", email: "maria@gmail.com"}
+]
+```
+
 ### class binding
 `button [class.active]="isActive"`
+
+### Property & Attribute binding
+```
+<img [src]="imageUrl">
+<td [colspan]="colSpan">
+<p [textContent]="text">
+```
 
 ### style binding
 `button [style.color]="isActive ? 'blue': 'white"`
@@ -66,4 +87,42 @@ export class CustomPipe implements PipeTransform {
   declarations: [CustomPipe]
 ```
 
-### components
+### Bind Input to Component
+```
+<component [isActive]="isActive"></component>
+1. @Input isActive: boolean;
+2. @component ({
+     ....,
+     inputs: [isActive]
+   })
+   isActive: boolean;
+
+alias:
+<component [isSelected]="isSelected"></component>
+@Input(isSelected) isActive: boolean;
+```
+
+### Bind Output to component
+```
+<component [isActive]="isActive" (change)="isActiveChange()"></component>
+@Output() change = new EventEmitter();
+this.change.emit();
+
+alias:
+@Output('isSelectedChange')
+```
+
+### ngContent
+```
+<app-component>
+    <div class="title">Title</div>
+</app-component>
+
+app.component.html:
+<div class="container">
+    <div class="head">
+        <ng-content select=".title"></ng-content>
+    </div>
+</div>
+```
+
