@@ -20,9 +20,16 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  inputChange(val: any) {
+    console.log(val);
+  }
+
   onSubmit(loginForm: any) {
-    let token = loginForm.email + ' - ' + Math.floor(Math.random() * 100);
-    localStorage.setItem('token', token);
-    this.service.reDirect('/table');
+    if (loginForm.form.valid) {
+      let token =
+        loginForm.value.email + ' - ' + Math.floor(Math.random() * 100);
+      localStorage.setItem('token', token);
+      this.service.reDirect('/table');
+    }
   }
 }

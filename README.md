@@ -220,7 +220,9 @@ trackItem(index, item) {
     some text...
 </div>
 ```
+
 ### custom directive
+
 ```
 <input type="text" [inputFormat]="'lowercase'">
 
@@ -240,4 +242,38 @@ constructor(private element: ElementRef) {}
 }
 ```
 
+### Template form
 
+```
+<form class="p-3" (ngSubmit)="onSubmit(sampleForm)" #sampleForm="ngForm">
+
+<input
+    name="email"
+    ngModel
+    #email="ngModel"
+    minlength="8"
+    ....
+/>
+
+<div *ngIf="email?.errors?.required">...</div>
+
+<div *ngIf="email?.errors?.minlength">
+    Please enter atleast {{ email?.errors?.minlength.requiredLength }} characters
+</div>
+
+<button [disabled]="sampleForm.form.invalid" >
+
+onSubmit(sampleForm: any) {
+    if (sampleForm.form.valid) { .. }
+    let email = sampleForm.value.email
+}
+```
+
+### ngValue
+
+input value can normally be a string. ngValue is used to bind a complex value ex:object.
+
+```
+<select>
+    <option *ngFor="let option of selectOptions" [ngValue]="option">
+```
