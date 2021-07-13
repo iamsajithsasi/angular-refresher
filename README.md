@@ -402,6 +402,21 @@ myForm = new FromGroup({
 ### Build Form Array using FormBuilder
 
 ```
+<form [formGroup]="myForm">
+    <div *ngFor="let batch_items of t.controls; let i = index">
+        <div [formGroup]="batch_items">
+            <div class="form-group">
+                <label>Name</label>
+                <input formControlName="batch_name" ... />
+            </div>
+            <p *ngIf="batch_items.controls.batch_name.errors?.required">
+                This field is required
+            </p>
+            ........
+        </div>
+    </div>
+</form>
+
 constructor(private fb: FormBuilder) {}
 
 this.myForm = this.fb.group({
@@ -426,4 +441,3 @@ onDeleteBatch(i) {
     this.t.removeAt(i);
 }
 ```
-
