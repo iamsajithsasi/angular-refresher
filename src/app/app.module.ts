@@ -8,18 +8,16 @@ import { HeaderComponent } from './header/header.component';
 import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from './shared.component';
 import { WorkbenchComponent } from './workbench/workbench.component';
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialmodModule } from './materialmod.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    DashboardComponent,
     WorkbenchComponent,
   ],
   imports: [
@@ -28,7 +26,9 @@ import { WorkbenchComponent } from './workbench/workbench.component';
     ReactiveFormsModule,
     AppRoutingModule,
     DashboardModule,
-    SharedModule
+    SharedModule,
+    MaterialmodModule,
+    BrowserAnimationsModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

@@ -1,2 +1,49 @@
-<p>login works!</p>
-<app-cards></app-cards>
+<form class="p-3" (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Enter your email</mat-label>
+      <input
+        matInput
+        name="email"
+        ngModel
+        required
+        #email="ngModel"
+        placeholder="Enter your email"
+      />
+      <mat-hint>Ex: admin@gmail.com</mat-hint>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Enter your password</mat-label>
+      <input
+        matInput
+        name="password"
+        ngModel
+        required
+        #password="ngModel"
+        [type]="hide ? 'password' : 'text'"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+        class="noBorderBtn"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!loginForm.form.valid"
+    >
+      Login
+    </button>
+  </div>
+</form>
