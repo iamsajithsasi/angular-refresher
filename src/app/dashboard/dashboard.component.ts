@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,16 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private service: AppService) {}
   token: any = '';
 
   ngOnInit() {
-    console.log('iniit')
+    console.log('iniit');
     this.token = localStorage?.getItem('token');
     if (this.token) {
-      this.router.navigateByUrl('/dashboard/blog');
+      this.service.reDirect('/table');
     } else {
-      this.router.navigateByUrl('/login');
+      this.service.reDirect('/login');
     }
   }
 }

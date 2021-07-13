@@ -12,6 +12,7 @@ import { SharedModule } from './shared.component';
 import { WorkbenchComponent } from './workbench/workbench.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialmodModule } from './materialmod.module';
+import { AppService } from './app.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { MaterialmodModule } from './materialmod.module';
     MaterialmodModule,
     BrowserAnimationsModule,
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, AppService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

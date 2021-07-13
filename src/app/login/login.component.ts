@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-login',
@@ -7,21 +7,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private service: AppService) {}
   hide: boolean = true;
   token: any = '';
 
   ngOnInit(): void {
     this.token = localStorage?.getItem('token');
     if (this.token) {
-      this.router.navigateByUrl('/dashboard/blog');
+      this.service.reDirect('/table');
     } else {
-      this.router.navigateByUrl('/login');
+      this.service.reDirect('/login');
     }
   }
 
   onSubmit(loginForm: any) {
     let token = loginForm.email + ' - ' + Math.floor(Math.random() * 100);
     localStorage.setItem('token', token);
+    this.service.reDirect('/table');
   }
 }
