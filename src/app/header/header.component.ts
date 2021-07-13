@@ -9,7 +9,9 @@ import { AppService } from '../app.service';
 export class HeaderComponent implements OnInit {
   constructor(private service: AppService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('init: header init');
+  }
 
   logout() {
     localStorage.clear();
