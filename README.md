@@ -242,33 +242,6 @@ constructor(private element: ElementRef) {}
 }
 ```
 
-### Template form
-
-```
-<form class="p-3" (ngSubmit)="onSubmit(sampleForm)" #sampleForm="ngForm">
-
-<input
-    name="email"
-    ngModel
-    #email="ngModel"
-    minlength="8"
-    ....
-/>
-
-<div *ngIf="email?.errors?.required">...</div>
-
-<div *ngIf="email?.errors?.minlength">
-    Please enter atleast {{ email?.errors?.minlength.requiredLength }} characters
-</div>
-
-<button [disabled]="sampleForm.form.invalid" >
-
-onSubmit(sampleForm: any) {
-    if (sampleForm.form.valid) { .. }
-    let email = sampleForm.value.email
-}
-```
-
 ### ngValue
 
 input value can normally be a string. ngValue is used to bind a complex value ex:object.
@@ -277,3 +250,180 @@ input value can normally be a string. ngValue is used to bind a complex value ex
 <select>
     <option *ngFor="let option of selectOptions" [ngValue]="option">
 ```
+
+### Template form
+
+For building a simple form
+
+```
+<form class="p-3" (ngSubmit)="onSubmit(sampleForm)" #sampleForm="ngForm">
+
+    <input
+        name="email"
+        ngModel
+        #email="ngModel"
+        minlength="8"
+        ....
+    />
+
+    <div *ngIf="email?.errors?.required">...</div>
+
+    <div *ngIf="email?.errors?.minlength">
+        Please enter atleast {{ email?.errors?.minlength.requiredLength }} characters
+    </div>
+
+    <button [disabled]="sampleForm.form.invalid" >
+
+onSubmit(sampleForm: any) {
+    if (sampleForm.form.valid) { .. }
+    let email = sampleForm.value.email
+}
+```
+
+### Reactive form
+
+for building a complex form with validations and more controls
+
+```
+<form [formGroup]="myForm">
+    <input
+        formControlName="email"
+        ....
+    >
+    <div
+        class="error"
+        *ngIf="myForm.get('email').invalid"
+        (or)
+        *ngIf="getEmail.invalid && getEmail.touched"
+    >
+        Required
+    </div>
+
+myForm = new FormGroup({
+    email: new FormControl("", Validators.required),
+    password: new FormControl("", [
+        Validators.required,
+        Validators.minLength(3),
+        CustomValidators.noSpace
+    ]),
+    ....
+});
+
+get getEmail() {
+    return this.myForm.get('email');
+}
+```
+
+### Custom validation (Synchronus)
+
+```
++custom.validator.ts
+export class CustomValidators {
+    static noSpace(control: AbstractControl) : ValidationErrors | null {
+        if((control.value as string).indexOf(' ') >= 0 ) {
+            return { noSpace : true };
+        }
+        return null;
+    }
+}
+```
+
+### Asynchronous validation
+
+```
+<input
+    formControlName="name"
+    ....
+>
+<div *ngIf="name.pending">Checking...</div>
+<div class="error" *ngIf="name.errors.uniqueName">
+    Not Unique Name
+</div>
+
+myForm = new FormGroup({
+    name: new FormControl(
+        "",
+        Validators.required,
+        CustomValidators.uniqueName,
+    ),
+    ....
+});
+
++custom.validator.ts
+export class CustomValidators {
+    static uniqueName(control: AbstractControl) : Promise<ValidationErrors | null> {
+        return new Promise((resolve, reject) => {
+            if(...Call API to check) {
+                resolve ({ uniqueName : true });
+            } else {
+                reject null;
+            }
+        });
+    }
+}
+```
+
+### Custom Validation on Form
+
+Add a form error after the form submit.
+
+```
+<form [formGroup]="myForm" (ngSubmit)="login()">
+    <div class="error" *ngIf="myForm.errors.invalidLogin">
+        Invalid login details...
+    </div>
+
+myForm = new FromGroup({ ... })
+login() {
+    this.myForm.setErrors({
+        invalidLogin: true,
+    })
+}
+```
+
+### Nested group in Reactive Form
+
+```
+<form [formGroup]="myForm">
+    <input formControlName="name" ...>
+    <div formGroupName="personal">
+        <input formControlName="age" ...>
+    </div>
+
+myForm = new FromGroup({
+    name: new FormControl(''),
+    personal: new FormGroup({
+        age: new FormControl(''),
+    })
+})
+
+```
+
+### Build Form Array using FormBuilder
+
+```
+constructor(private fb: FormBuilder) {}
+
+this.myForm = this.fb.group({
+    batch_items: this.fb.array([this.buildBatch()])
+});
+
+get f() { return this.myForm.controls; }
+get t() { return this.f.batch_items as FormArray; }
+
+onAddBatch() {
+    this.t.push(this.buildBatch());
+}
+
+buildBatch() {
+    return this.fb.group({
+        batch_name: ['', Validators.required],
+        ....
+    })
+}
+
+onDeleteBatch(i) {
+    this.t.removeAt(i);
+}
+```
+
