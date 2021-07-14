@@ -441,3 +441,106 @@ onDeleteBatch(i) {
     this.t.removeAt(i);
 }
 ```
+
+### HTTP services
+
+Patch -> Send only the key to be updated from the body to the API
+ex: update only name from {name: '', age: '', dob: ''}
+Put -> Send full body to the API for update
+
+```
+import { Http } from '@angular/http';
+constructor(public http: Http) { }
+
+this.http.get("url").subscribe(res => res.json());
+this.http.post("url", JSON.stringify(body)).subscribe(res => res.json());
+this.http.patch("url" + id, JSON.stringify( { name: "John" } )).subscribe(res => res.json());
+this.http.put("url" + id, JSON.stringify(body)).subscribe(res => res.json());
+this.http.delete("url" + id).subscribe(res => res.json());
+
++ app.module.ts
+imports: [
+    HttpModule
+]
+```
+
+### Create services
+
+```
+constructor(private api: ApiService) {}
+this.api.getData().subscribe(res => ... )
+this.api.postData(id, value).subscribe(
+    res => {
+        console.log(res.json())
+    },
+    error: Response => {
+        console.log("error ", error)
+    }
+);
+
+@Injectable()
+export class ApiService {
+    private url: "www.baseurl.com/";
+
+    constructor(private http: Http) {}
+
+    getData() {
+        return this.http.get(this.url)
+            .catch((error: Response) => {
+                return Observable.throw(new AppError(error))
+            })
+    }
+
+    postData(id, body) {
+        return this.http.post('this.url' + id, JSON.stringify(body));
+    }
+}
+
++ app.module.ts
+providers: [
+    ApiService,
+    ....
+]
+```
+
+### Route Parameters
+
+```
+path: 'post/:id'
+constructor(private route: ActivatedRoute) {}
+
+this.route.paramMap.subscribe(param => {
+    param.get('id');
+})
+this.route.snapshot.params.id;
+
+// query params /post?id=2&type=latest
+this.route.queryParamMap.subscribe(param => {
+    param.get('id');
+});
+this.route.snapshot.queryParamMap.get('id')
+```
+
+### Router link with multiple params
+
+Url: www.example.com/post/2/latest
+
+`<a [routerLink]="['/post', post.id, post.type]" >`
+
+### Router link with query params
+
+Url: www.example.com/post/?id=2&type=latest
+
+`<a [routerLink]="/post" [queryParams]="{ id: 2, type: 'latest' }" >`
+
+### Router Navigation
+
+Url: www.example.com/post?id=1&order=newest
+
+```
+constructor(private route: ActivatedRoute) {}
+
+this.router.navigate(['post'],{
+    queryParams: { id: 1, type: 'latest' }
+})
+```
