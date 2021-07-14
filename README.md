@@ -373,7 +373,7 @@ Add a form error after the form submit.
         Invalid login details...
     </div>
 
-myForm = new FromGroup({ ... })
+myForm = new FormGroup({ ... })
 login() {
     this.myForm.setErrors({
         invalidLogin: true,
@@ -390,7 +390,7 @@ login() {
         <input formControlName="age" ...>
     </div>
 
-myForm = new FromGroup({
+myForm = new FormGroup({
     name: new FormControl(''),
     personal: new FormGroup({
         age: new FormControl(''),
