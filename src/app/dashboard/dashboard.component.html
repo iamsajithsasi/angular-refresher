@@ -1,13 +1,13 @@
 <section class="d-flex flex-nowrap">
-  <aside class="d-flex flex-column">
-    <a [routerLink]="['/table']" routerLinkActive="router-link-active"
+  <aside class="d-flex flex-column pt-3">
+    <a [routerLink]="['/table']" routerLinkActive="active"
       >Table</a
     >
-    <a [routerLink]="['/blog']" routerLinkActive="router-link-active"
+    <a [routerLink]="['/blog']" routerLinkActive="active"
       >Blog</a
     >
   </aside>
-  <main>
+  <main class="p-3">
     <router-outlet></router-outlet>
   </main>
 </section>

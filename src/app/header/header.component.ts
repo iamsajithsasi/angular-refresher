@@ -13,6 +13,10 @@ export class HeaderComponent implements OnInit {
     console.log('init: header init');
   }
 
+  isLoggedIn() {
+    return this.service.isToken();
+  }
+
   logout() {
     localStorage.clear();
     this.service.reDirect('/login');

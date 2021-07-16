@@ -1,6 +1,12 @@
-<div class="d-flex">
-  <div>MyApp</div>
-  <div class="ml-auto">
-    <button class="btn btn-link" (click)="logout()">Logout</button>
+<div class="header d-flex align-items-center">
+  <div class="container">
+    <div class="d-flex align-items-center">
+      <div>MyApp</div>
+      <div class="ml-auto">
+        <div class="onlogin" *ngIf="isLoggedIn()">
+          <button class="btn btn-link" (click)="logout()">Logout</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

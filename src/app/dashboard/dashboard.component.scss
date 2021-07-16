@@ -5,4 +5,11 @@ aside {
   width: 100%;
   max-width: 250px;
   min-width: 250px;
+  border-right: 1px solid #e1e1e1;
+}
+a {
+  padding: 4px 10px;
+}
+a.active {
+  background-color: #e1e1e1;
 }

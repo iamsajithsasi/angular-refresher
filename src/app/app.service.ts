@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class AppService {
   constructor(private router: Router) {}
-  getToken() {
+  isToken() {
     return !!localStorage.getItem('token');
   }
   reDirect(path: string) {
