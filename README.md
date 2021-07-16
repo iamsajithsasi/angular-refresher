@@ -544,3 +544,42 @@ this.router.navigate(['post'],{
     queryParams: { id: 1, type: 'latest' }
 })
 ```
+
+### canActivate
+
+```
++auth.guard.ts
+import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuard implements CanActivate {
+  constructor(private router: Router) {}
+  canActivate() {
+    if (localStorage.getItem('token')) {
+      return true;
+    }
+    this.router.navigate(['']);
+    return false;
+  }
+}
+
++app.module.ts
+providers: [AuthGuard]
+
+// define route
+const routes: Routes = [
+  {
+    path: '',
+    component: ExampleComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'blog', component: BlogComponent },
+      ....
+    ],
+  },
+];
+
+```
