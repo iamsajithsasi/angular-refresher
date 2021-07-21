@@ -648,8 +648,20 @@ export const environment = {
 ng serve --configuration=test // new version 12
 ```
 
-Testing
+### Testing
+
+Unit Test: Only component test <br/>
+Integration Test: Component and also template <br/>
+End to End Test : Full functionality working (ex: Login, add data, check if updated)
 
 ```
+// Integration Test:
+    <p>{{count}}</p>
+    <button (click)="onBtnClick()">Click</button>
 
+    // Unit Test:
+        count:number = 0;
+        onBtnClick() {
+            this.count++;
+        }
 ```
