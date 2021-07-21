@@ -621,18 +621,20 @@ export const environment = {
   color: 'red',
 };
 
-+angular.json
-"configurations": {
-    ...
-    "test": {
++angular.json // copy and replace
+"build": {
+    "configurations": {
         ...
-        "fileReplacements": [
-            {
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.test.ts"
-            }
-        ]
-    }
+        "test": {
+            ...
+            "fileReplacements": [
+                {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.test.ts"
+                }
+            ]
+        }
+    },
 },
 "serve": {
     "configurations": {
@@ -644,4 +646,10 @@ export const environment = {
 }
 
 ng serve --configuration=test // new version 12
+```
+
+Testing
+
+```
+
 ```
