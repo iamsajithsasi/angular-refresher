@@ -583,3 +583,17 @@ const routes: Routes = [
 ];
 
 ```
+
+### Custom node and npm version
+
+```
++package.json
+"dependencies": {
+    ...
+},
+"engines": {
+    "node": "6.10.1",
+    "npm": "5.3.0"
+}
+```
+
