@@ -603,7 +603,6 @@ const routes: Routes = [
 ng serve // default dev environment
 ng serve --configuration=production // new version 12
 ng serve --environment=production // earlier version
-ng serve --configuration=test // new version 12
 
 +header.ts
 import { environment } from 'src/environments/environment';
@@ -643,4 +642,6 @@ export const environment = {
         },
     }
 }
+
+ng serve --configuration=test // new version 12
 ```
