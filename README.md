@@ -597,3 +597,50 @@ const routes: Routes = [
 }
 ```
 
+### Environment
+
+```
+ng serve // default dev environment
+ng serve --configuration=production // new version 12
+ng serve --environment=production // earlier version
+ng serve --configuration=test // new version 12
+
++header.ts
+import { environment } from 'src/environments/environment';
+backgroundColor = environment.color;
+
++header.component.html
+<div class="header" [style.backgroundColor]="backgroundColor" >
+```
+
+### Custom Environment
+
+```
++environment.test.ts
+export const environment = {
+  production: false,
+  color: 'red',
+};
+
++angular.json
+"configurations": {
+    ...
+    "test": {
+        ...
+        "fileReplacements": [
+            {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.test.ts"
+            }
+        ]
+    }
+},
+"serve": {
+    "configurations": {
+        ...
+        "test": {
+            "browserTarget": "myproject:build:test"
+        },
+    }
+}
+```
