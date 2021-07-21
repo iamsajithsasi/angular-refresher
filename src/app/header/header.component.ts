@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { AppService } from '../app.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { AppService } from '../app.service';
 })
 export class HeaderComponent implements OnInit {
   constructor(private service: AppService) {}
+  backgroundColor = environment.color;
 
   ngOnInit(): void {
     console.log('init: header init');
