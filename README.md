@@ -13,7 +13,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ```
 export interface MyTable {
     name: string;
-    email: string;
+    email?: string; // ? for optional field.
 }
 const tableData: MyTable[] = [
     {name: "john", email: "john@gmail.com"}
