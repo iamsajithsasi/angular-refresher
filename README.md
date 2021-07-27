@@ -442,6 +442,13 @@ onDeleteBatch(i) {
 }
 ```
 
+### Reactive form methods
+
+```
+this.myForm.disable(); // disable all fields
+this.myForm.controls.email.disable(); // disabled particular field
+```
+
 ### HTTP services
 
 Patch -> Send only the key to be updated from the body to the API
