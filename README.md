@@ -447,6 +447,7 @@ onDeleteBatch(i) {
 ```
 this.myForm.disable(); // disable all fields
 this.myForm.controls.email.disable(); // disabled particular field
+this.myForm.controls.email.disable({ onlySelf: true }); // disable by preserving value during submission
 ```
 
 ### HTTP services
