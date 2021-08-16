@@ -312,6 +312,11 @@ myForm = new FormGroup({
 get getEmail() {
     return this.myForm.get('email');
 }
+
+this.myForm.controls.email.setValue("saj@gmail.com");
+this.newForm.patchValue({
+   email: 'saj@gmail.com'
+});
 ```
 
 ### Custom validation (Synchronus)
@@ -661,6 +666,25 @@ export const environment = {
 }
 
 ng serve --configuration=test // new version 12
+```
+
+### Overwrite css of any added plugin if encapsulated
+
+```
+import { ..., ViewEncapsulation } from "@angular/core";
+
+@Component({
+    selector: "",
+    templateUrl: "",
+    styleUrls: [""],
+    encapsulation: ViewEncapsulation.None,
+})
+
+(or)
+
+::ng-deep .multi-dropdown {
+    ...css
+}
 ```
 
 ### Testing
