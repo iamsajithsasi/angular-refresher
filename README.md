@@ -312,11 +312,6 @@ myForm = new FormGroup({
 get getEmail() {
     return this.myForm.get('email');
 }
-
-this.myForm.controls.email.setValue("saj@gmail.com");
-this.newForm.patchValue({
-   email: 'saj@gmail.com'
-});
 ```
 
 ### Custom validation (Synchronus)
@@ -453,6 +448,13 @@ onDeleteBatch(i) {
 this.myForm.disable(); // disable all fields
 this.myForm.controls.email.disable(); // disabled particular field
 this.myForm.controls.email.disable({ onlySelf: true }); // disable by preserving value during submission
+this.myForm = new FormGroup({
+    email: new FormControl(
+        { value: "", disabled: true },
+        Validators.min(1)
+    ),
+    ...
+});
 this.myForm.get("email").valueChanges.subscribe((v) => {
   if (v) {
     this.itemForm.get("phone").enable();
@@ -460,6 +462,14 @@ this.myForm.get("email").valueChanges.subscribe((v) => {
     this.itemForm.get("phone").disable();
   }
 });
+this.myForm.get("email");
+this.myForm.getRawValue(); // also output disabled fields
+this.myForm.controls.email.setValue("saj@gmail.com");
+this.myForm.patchValue({
+   email: 'saj@gmail.com'
+});
+this.myForm.reset();
+
 ```
 
 ### HTTP services
