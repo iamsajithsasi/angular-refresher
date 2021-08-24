@@ -469,6 +469,7 @@ this.myForm.patchValue({
    email: 'saj@gmail.com'
 });
 this.myForm.reset();
+this.myForm.setControl("locations", this.fb.array([])); // reset a form array
 
 ```
 
