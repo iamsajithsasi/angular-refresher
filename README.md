@@ -715,3 +715,8 @@ End to End Test : Full functionality working (ex: Login, add data, check if upda
             this.count++;
         }
 ```
+
+### Utilities
+Error: More than one module matches. Use skip-import option to skip importing the component into the closest module
+
+`ng g c componentname --module app`
