@@ -489,19 +489,27 @@ this.http.patch("url" + id, JSON.stringify( { name: "John" } )).subscribe(res =>
 this.http.put("url" + id, JSON.stringify(body)).subscribe(res => res.json());
 this.http.delete("url" + id).subscribe(res => res.json());
 
+this.httpClient.get(url, { params: params });
+this.httpClient.post(url, data, { params: params });
+this.httpClient.request("DELETE", url, {
+    body: {
+        id: id,
+        name: name,
+    },
+});
+
+
 // form data
 let data = new FormData();
 data.append("file", file);
 let params = new HttpParams();
 params = params.append("type", "formdata");
-return this.httpClient.post(baseURL + url, data, {
-    params: params
-});
+return this.httpClient.post(url, data, { params: params });
 
 // pass params -? api/list?search=text
 let params = new HttpParams();
 params = params.append("search", 'text');
-return this.httpClient.get(baseURL + url, { params: params });
+return this.httpClient.get(url, { params: params });
 
 + app.module.ts
 imports: [
