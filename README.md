@@ -480,14 +480,28 @@ ex: update only name from {name: '', age: '', dob: ''}
 Put -> Send full body to the API for update
 
 ```
-import { Http } from '@angular/http';
-constructor(public http: Http) { }
+import { Http, HttpClient, HttpParams } from '@angular/http';
+constructor(public http: Http, public httpClient: HttpClient) { }
 
 this.http.get("url").subscribe(res => res.json());
 this.http.post("url", JSON.stringify(body)).subscribe(res => res.json());
 this.http.patch("url" + id, JSON.stringify( { name: "John" } )).subscribe(res => res.json());
 this.http.put("url" + id, JSON.stringify(body)).subscribe(res => res.json());
 this.http.delete("url" + id).subscribe(res => res.json());
+
+// form data
+let data = new FormData();
+data.append("file", file);
+let params = new HttpParams();
+params = params.append("type", "formdata");
+return this.httpClient.post(baseURL + url, data, {
+    params: params
+});
+
+// pass params -? api/list?search=text
+let params = new HttpParams();
+params = params.append("search", 'text');
+return this.httpClient.get(baseURL + url, { params: params });
 
 + app.module.ts
 imports: [
