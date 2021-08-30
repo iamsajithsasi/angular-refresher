@@ -511,6 +511,9 @@ let params = new HttpParams();
 params = params.append("search", 'text');
 return this.httpClient.get(url, { params: params });
 
+// multiple params
+params = params.append("search", 'text').append("id", id);
+
 + app.module.ts
 imports: [
     HttpModule
