@@ -204,6 +204,21 @@ trackItem(index, item) {
 }
 ```
 
+### ngFor (Run a query after ngFor is completed)
+
+```
+<ul *ngFor="let item of datas;" #sampleList>
+    <li>{{item.name}}</li>
+</ul>
+
+@ViewChildren("sampleList") sampleList:QueryList<any>;
+ngAfterViewInit() {
+    this.sampleList.changes.subscribe(t => {
+        // ngFor is render... do some actions
+    });
+}
+```
+
 ### ngClass & ngStyle
 
 ```
@@ -489,7 +504,7 @@ this.http.patch("url" + id, JSON.stringify( { name: "John" } )).subscribe(res =>
 this.http.put("url" + id, JSON.stringify(body)).subscribe(res => res.json());
 this.http.delete("url" + id).subscribe(res => res.json());
 
-this.httpClient.get(url, { params: params });
+this.httpClient.(url, { params: params });
 this.httpClient.post(url, data, { params: params });
 this.httpClient.request("DELETE", url, {
     body: {
