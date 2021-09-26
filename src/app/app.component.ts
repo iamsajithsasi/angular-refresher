@@ -7,6 +7,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  title = "Angular Dashboard"
   constructor() { }
   
   SignUp: FormGroup = new FormGroup({
