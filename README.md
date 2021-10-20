@@ -137,11 +137,19 @@ alias:
 // pass some value to template
 <div *ngFor="let item of movieList;">
   <ng-template *ngTemplateOutlet="itemPrice; context: {$implicit: item}"></ng-template>
+  
+  // pass multiple value
+  <ng-template *ngTemplateOutlet="itemDetail; context: {$implicit: item, index:idx}"></ng-template>
 </div>
 
 <ng-template #itemPrice let-item>
   <p>{{item.name}}</p>
   <p>{{item.year}}</p>
+</ng-template>
+
+
+<ng-template #itemDetail let-item let-idx="index">
+  <p>{{ idx }} {{item.quantity}}</p>
 </ng-template>
 ```
 
