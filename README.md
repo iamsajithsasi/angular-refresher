@@ -126,6 +126,15 @@ alias:
 @Output('isSelectedChange')
 ```
 
+### ngTemplate
+```
+<ng-template [ngTemplateOutlet]="MsgRefEs"></ng-template>
+
+<ng-template #MsgRef >
+  <p>Some content to re-use</p>
+</ng-template>
+```
+
 ### ngContent
 
 ```
