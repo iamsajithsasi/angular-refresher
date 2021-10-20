@@ -128,7 +128,7 @@ alias:
 
 ### ngTemplate
 ```
-<ng-template [ngTemplateOutlet]="MsgRefEs"></ng-template>
+<ng-template [ngTemplateOutlet]="MsgRef"></ng-template>
 
 <ng-template #MsgRef >
   <p>Some content to re-use</p>
