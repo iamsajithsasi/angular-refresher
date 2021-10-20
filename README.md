@@ -133,6 +133,16 @@ alias:
 <ng-template #MsgRef >
   <p>Some content to re-use</p>
 </ng-template>
+
+// pass some value to template
+<div *ngFor="let item of movieList;">
+  <ng-template *ngTemplateOutlet="itemPrice; context: {$implicit: item}"></ng-template>
+</div>
+
+<ng-template #itemPrice let-item>
+  <p>{{item.name}}</p>
+  <p>{{item.year}}</p>
+</ng-template>
 ```
 
 ### ngContent
