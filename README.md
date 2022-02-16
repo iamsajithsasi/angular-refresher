@@ -785,7 +785,6 @@ src/app
     export const authRoutes: Routes = [
         { path: "dashboard", component: DashboardComponent },
     ];
-
     @NgModule({
         imports: [RouterModule.forChild(authRoutes)],
         exports: [RouterModule],
@@ -809,7 +808,7 @@ src/app
             AuthLayoutRoutingModule
         ]
     })
-export class AuthLayoutModule { }
+    export class AuthLayoutModule { }
 
 +shared.module.ts
     @NgModule({
@@ -827,7 +826,6 @@ export class AuthLayoutModule { }
     export class SharedModule { }
 
 +app.routing.module.ts
-
     const routes: Routes = [
         ....,
         {
@@ -838,7 +836,6 @@ export class AuthLayoutModule { }
         },
         { path: '**', redirectTo: AppConstants.ERROR_URL },
     ];
-
     @NgModule({
         imports: [RouterModule.forRoot(routes)],
         exports: [RouterModule],
