@@ -771,6 +771,100 @@ End to End Test : Full functionality working (ex: Login, add data, check if upda
 Priciple: Arrange, Act, Assert
 ### 
 
+
+### create common layout route
+```
+File structure:
+src/app
+    >auth-layout
+        > dashboard
+        > ....
+    >common
+
++auth-layout.routing.module.ts
+    export const authRoutes: Routes = [
+        { path: "dashboard", component: DashboardComponent },
+    ];
+
+    @NgModule({
+        imports: [RouterModule.forChild(authRoutes)],
+        exports: [RouterModule],
+        providers: [],
+    })
+    export class AuthLayoutRoutingModule {}
+
++auth-layout.component.html
+    <div>
+        <sidebar-app></sidebar-app>
+        <router-outlet></router-outlet>
+    </div>
+
++auth-layout.module.ts
+    @NgModule({
+        declarations: [
+            DashboardComponent,
+        ],
+        imports: [
+            SharedModule,
+            AuthLayoutRoutingModule
+        ]
+    })
+export class AuthLayoutModule { }
+
++shared.module.ts
+    @NgModule({
+    declarations: [],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ...
+    ],
+    exports: [
+        ...same as import
+    ]
+    })
+    export class SharedModule { }
+
++app.routing.module.ts
+
+    const routes: Routes = [
+        ....,
+        {
+            path: "",
+            component: AuthLayoutComponent,
+            canActivate: [...],
+            loadChildren: () => import('./auth-layout/auth-layout.module').then(x => x.AuthLayoutModule)
+        },
+        { path: '**', redirectTo: AppConstants.ERROR_URL },
+    ];
+
+    @NgModule({
+        imports: [RouterModule.forRoot(routes)],
+        exports: [RouterModule],
+        providers: [CanViewDashboard],
+    })
+    export class AppRoutingModule {}
+
++app.module.ts
+    @NgModule({
+        declarations: [
+            AuthLayoutComponent
+        ],
+        imports: [
+            BrowserModule,
+            BrowserAnimationsModule,
+            HttpClientModule,
+            SharedModule,
+            AppRoutingModule,
+        ],
+        providers: [],
+        bootstrap: [AppComponent]
+    })
+    export class AppModule { }
+
+```
+
 ### Utilities
 Error: More than one module matches. Use skip-import option to skip importing the component into the closest module
 
