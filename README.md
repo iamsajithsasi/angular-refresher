@@ -772,7 +772,7 @@ Priciple: Arrange, Act, Assert
 ### 
 
 
-### create common layout route
+### create auth layout on route
 ```
 File structure:
 src/app
@@ -780,6 +780,7 @@ src/app
         > dashboard
         > ....
     >common
+        > shared.module.ts
 
 +auth-layout.routing.module.ts
     export const authRoutes: Routes = [
