@@ -863,6 +863,12 @@ src/app
 
 ```
 
+### restore scroll position on router change
+```
+  @NgModule({
+    imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
+```
+
 ### Utilities
 Error: More than one module matches. Use skip-import option to skip importing the component into the closest module
 
